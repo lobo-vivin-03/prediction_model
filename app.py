@@ -162,7 +162,7 @@ def analyze_summary():
     if 'file' not in request.files:
         return jsonify({"error": "No file part"}), 400
 
-    youtube_api_key = "AIzaSyCPJ9FMV7P1VusmnhtEOyARPqdV54zUDrE"  # Testing, change to env later
+    youtube_api_key = ""  # Testing, change to env later
     file = request.files['file']
 
     # If no file is selected
