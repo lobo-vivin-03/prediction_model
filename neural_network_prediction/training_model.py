@@ -6,10 +6,10 @@ from sklearn.preprocessing import MinMaxScaler
 import joblib 
 
 # Step 1: Load Data
-df = pd.read_csv('enhanced_data.csv')
+df = pd.read_csv('dataset.csv')
 
 # Separate features (q1, q2, q3, time_spent) and target (final_exam)
-X = df[['q1', 'q2', 'q3', 'time_spent']].values
+X = df[['Quiz1', 'Quiz2', 'Quiz3', 'HoursSpent']].values
 y = df['final_exam'].values
 
 # Step 2: Scale Inputs and Outputs
@@ -33,14 +33,14 @@ model.compile(optimizer='adam', loss='mse', metrics=['mae'])
 model.fit(X_scaled, y_scaled, epochs=200, batch_size=2, verbose=1)
 
 # Step 5: Save the trained model
-model.save('final_exam_model.h5')
+model.save('updated_model/final_exam_model.h5')
 print("Model saved as 'final_exam_model.h5'")
 
-joblib.dump(scaler_X, 'scaler_X.pkl')
-joblib.dump(scaler_y, 'scaler_y.pkl')
+joblib.dump(scaler_X, 'updated_model/scaler_X.pkl')
+joblib.dump(scaler_y, 'updated_model/scaler_y.pkl')
 
 # Step 6: Predict Final Exam Marks
-new_quiz_scores = np.array([[10, 14, 13, 4.9]])  # New input: q1, q2, q3, time_spent
+new_quiz_scores = np.array([[10, 14, 13, 4.6]])  # New input: q1, q2, q3, time_spent
 new_quiz_scaled = scaler_X.transform(new_quiz_scores)
 
 # Predict using the trained model
